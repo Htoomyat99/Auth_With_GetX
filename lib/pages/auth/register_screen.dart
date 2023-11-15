@@ -2,9 +2,11 @@ import 'package:auth_with_getx/components/btn_text.dart';
 import 'package:auth_with_getx/components/date_time.dart';
 import 'package:auth_with_getx/components/pass_text_input.dart';
 import 'package:auth_with_getx/components/text_input_box.dart';
+import 'package:auth_with_getx/modal/user.dart';
 import 'package:auth_with_getx/pages/auth/login_screen.dart';
 import 'package:auth_with_getx/pages/dashboard/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -66,18 +68,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void registerAction() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => MainScreen(),
-      ),
-    );
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => MainScreen(),
+    //   ),
+    // );
+    // debugPrint(
+    //     'phone => ${_phoneController.text} name => ${_userNameController.text} address => ${_addressController.text} dob => ${dateOfBirth} pass => ${_passController.text} confirmPass => ${_confirmPassController.text}');
+
+    final regUser = User(
+        phone: _phoneController.text,
+        userName: _userNameController.text,
+        address: _addressController.text,
+        dateOfBirth: dateOfBirth,
+        password: _passController.text);
+
+    debugPrint('user >>> ${regUser.address}');
+    // Get.off(
+    //   () => const MainScreen(),
+    // );
   }
 
   void goLogIn() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => LoginScreen(),
-      ),
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => LoginScreen(),
+    //   ),
+    // );
+    Get.to(
+      const LoginScreen(),
     );
   }
 

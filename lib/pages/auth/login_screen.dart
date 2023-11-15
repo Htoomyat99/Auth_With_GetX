@@ -5,6 +5,7 @@ import 'package:auth_with_getx/pages/auth/register_screen.dart';
 import 'package:auth_with_getx/pages/dashboard/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,19 +26,27 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void goRegister() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => RegisterScreen(),
-      ),
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => RegisterScreen(),
+    //   ),
+    // );
+    Get.to(
+      const RegisterScreen(),
     );
   }
 
-  void LogInAction() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => MainScreen(),
-      ),
-    );
+  void logInAction() {
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => MainScreen(),
+    //   ),
+    // );
+    debugPrint(
+        'phone >>> ${_phoneController.text} password >>> ${_passController.text}');
+    // Get.off(
+    //   () => const MainScreen(),
+    // );
   }
 
   @override
@@ -98,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 35,
               ),
-              ButtonText(onPressed: LogInAction, btnText: 'Log In'),
+              ButtonText(onPressed: logInAction, btnText: 'Log In'),
               SizedBox(
                 height: 20,
               ),
