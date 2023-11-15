@@ -6,6 +6,7 @@ import 'package:auth_with_getx/pages/auth/login_screen.dart';
 import 'package:auth_with_getx/pages/dashboard/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -22,6 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _addressController = TextEditingController();
   bool passObsecureText = false;
   bool confirmPassObsecureText = false;
+  String dateOfBirth = '';
 
   void passVisibleToggle() {
     setState(() {
@@ -35,15 +37,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
   }
 
-  void goDatePicker() {
+  void goDatePicker() async {
     final now = DateTime.now();
-    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final firstDate = DateTime(now.year - 100, now.month, now.day);
     final lastDate = DateTime(now.year, now.month, now.day);
-    showDatePicker(
-        context: context,
-        initialDate: now,
-        firstDate: firstDate,
-        lastDate: lastDate);
+    DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(primary: Colors.teal),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    debugPrint('ptint ${date.runtimeType}');
+
+    setState(() {
+      final formatter = DateFormat.yMd();
+      final formattedDate = formatter.format(date as DateTime);
+      dateOfBirth = formattedDate;
+    });
   }
 
   void registerAction() {
@@ -132,6 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 8,
               ),
               DateTimeWidget(
+                dateOfBirth: dateOfBirth,
                 datePicker: goDatePicker,
               ),
               SizedBox(
