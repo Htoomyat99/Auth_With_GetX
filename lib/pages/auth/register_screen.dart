@@ -2,7 +2,7 @@ import 'package:auth_with_getx/components/btn_text.dart';
 import 'package:auth_with_getx/components/date_time.dart';
 import 'package:auth_with_getx/components/pass_text_input.dart';
 import 'package:auth_with_getx/components/text_input_box.dart';
-import 'package:auth_with_getx/modal/user.dart';
+import 'package:auth_with_getx/models/user.dart';
 import 'package:auth_with_getx/pages/auth/login_screen.dart';
 import 'package:auth_with_getx/pages/dashboard/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -84,9 +84,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         password: _passController.text);
 
     debugPrint('user >>> ${regUser.address}');
-    // Get.off(
-    //   () => const MainScreen(),
-    // );
+    Get.to(
+      () => const MainScreen(),
+      transition: Transition.native,
+      curve: Curves.easeIn,
+    );
   }
 
   void goLogIn() {
