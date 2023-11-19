@@ -25,4 +25,6 @@ class User {
         'dateOfBirth': dateOfBirth,
         'password': password,
       };
+
+  getProperties() {}
 }
